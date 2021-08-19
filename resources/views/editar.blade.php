@@ -28,6 +28,10 @@
             @endif
         </div>
         <div>
+            <label for="edit-color-task" class="h4">Color:</label>
+            {{ Form::input('color', 'color', $task->color, ['id'=>'edit-color-task']) }}
+        </div>
+        <div>
             <label for="edit-description-task" class="h4">Description:</label>
             {{ Form::textarea('description', $task->description, ['class'=>'form-control mb-3', 'id'=>'edit-description-task']) }}
             @if($errors->has('description'))

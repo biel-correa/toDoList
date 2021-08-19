@@ -13,14 +13,14 @@ class TasksController extends Controller
 
     public function getTasks(){
         $tasks = DB::table('tasks')
-        ->select(array('id', 'title', 'description', 'status'))
+        ->select(array('id', 'title', 'description', 'status', 'color'))
         ->get();
         return $tasks;
     }
 
     public function getTasksById(int $id){
         $task = DB::table('tasks')
-        ->select('id', 'title', 'description', 'status')
+        ->select('id', 'title', 'description', 'status', 'color')
         ->where('id', $id)
         ->get();
         return $task[0];
@@ -31,7 +31,8 @@ class TasksController extends Controller
         $validated = $request->validate([
             'title'=>['required', 'max:255'],
             'description'=>['max:1000'],
-            'status'=>['max:50']
+            'status'=>['max:50'],
+            'color'=>['max:10']
         ]);
         if ($validated) {
             DB::table('tasks')
@@ -39,7 +40,8 @@ class TasksController extends Controller
             ->update([
                 'title'=>$request->title,
                 'description'=>$request->description,
-                'status'=>$request->status
+                'status'=>$request->status,
+                'color'=>$request->color
             ]);
             return redirect()->route('home');
         } else {
