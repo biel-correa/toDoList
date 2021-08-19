@@ -4,6 +4,7 @@
             <h5 class="card-title">
                 {{$item->title}}
             </h5>
+            <p>{{$item->status}}</p>
             <p class="card-text">
                 {{$item->description}}
             </p>

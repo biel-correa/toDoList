@@ -14,7 +14,16 @@
             {{ Form::text('title', $task->title, ['class'=>'form-control mb-3', 'id'=>'edit-title-task']) }}
             @if($errors->has('title'))
                 <p class="text-danger">
-                    {{ $errors->first('title')}}
+                    {{ $errors->first('title') }}
+                </p>
+            @endif
+        </div>
+        <div>
+            <label for="edit-status-task" class="h4">Status:</label>
+            {{ Form::text('status', $task->status, ['class'=>'form-control mb-3', 'id'=>'edit-status-task'])}}
+            @if($errors->has('status'))
+                <p class="text-danger">
+                    {{ $errors->first('status') }}
                 </p>
             @endif
         </div>
