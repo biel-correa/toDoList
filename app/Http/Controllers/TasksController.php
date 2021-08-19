@@ -46,13 +46,20 @@ class TasksController extends Controller
     }
 
     public function addTask(Request $request){
-        $newTask = [
-            'title'=>$request->title,
-            'description'=>$request->description
-        ];
-        DB::table('tasks')
-        ->insert($newTask);
-        return redirect()->route('home');
+        $validated = $request->validate([
+            'title'=>['required', 'max:255']
+        ]);
+        if ($validated) {
+            $newTask = [
+                'title'=>$request->title,
+                'description'=>$request->description
+            ];
+            DB::table('tasks')
+            ->insert($newTask);
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('home')->withErrors($validated);
+        }
     }
 
     public function listTasks(){

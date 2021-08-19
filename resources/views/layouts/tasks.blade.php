@@ -9,7 +9,13 @@
                     'method'=>'POST'    
                 ])
             }}
-                <input type="text" placeholder="Nova tarefa" name="title" class="form-control mb-3">
+                <label for="new-task-title" class="h4">Task title</label>
+                <input type="text" placeholder="Nova tarefa" id="new-task-title" name="title" class="form-control mb-3">
+                @if($errors->has('title'))
+                    <p class="text-danger">
+                        {{ $errors->first('title') }}
+                    </p>
+                @endif
                 <button class="btn btn-primary">Adicionar Tarefa</button>
             {{
                 Form::close()
