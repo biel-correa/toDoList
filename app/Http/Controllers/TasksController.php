@@ -28,13 +28,21 @@ class TasksController extends Controller
 
 
     public function updateTask(int $id, Request $request){
-        DB::table('tasks')
-        ->where('id', $id)
-        ->update([
-            'title'=>$request->title,
-            'description'=>$request->description
+        $validated = $request->validate([
+            'title'=>['required', 'max:255'],
+            'description'=>['max:1000']
         ]);
-        return redirect()->route('home');
+        if ($validated) {
+            DB::table('tasks')
+            ->where('id', $id)
+            ->update([
+                'title'=>$request->title,
+                'description'=>$request->description
+            ]);
+            return redirect()->route('editar', ['id'=>$id]);
+        } else {
+            return redirect()->route('editar', ['id'=>$id])->withErrors($validated);
+        }
     }
 
     // implementar delete

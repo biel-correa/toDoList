@@ -10,10 +10,22 @@
             ])
         }}
         <div>
-            {{ Form::text('title', $task->title, ['class'=>'form-control mb-3']) }}
+            <label for="edit-title-task" class="h4">Title:</label>
+            {{ Form::text('title', $task->title, ['class'=>'form-control mb-3', 'id'=>'edit-title-task']) }}
+            @if($errors->has('title'))
+                <p class="text-danger">
+                    {{ $errors->first('title')}}
+                </p>
+            @endif
         </div>
         <div>
-            {{ Form::textarea('description', $task->description, ['class'=>'form-control mb-3']) }}
+            <label for="edit-description-task" class="h4">Description:</label>
+            {{ Form::textarea('description', $task->description, ['class'=>'form-control mb-3', 'id'=>'edit-description-task']) }}
+            @if($errors->has('description'))
+                <p class="text-danger">
+                    {{ $errors->first('description')}}
+                </p>
+            @endif
         </div>
         <button class="btn btn-primary btn-block">Salvar</button>
         {{
